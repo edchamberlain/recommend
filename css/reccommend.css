@@ -1,0 +1,160 @@
+#coverflow {
+         margin-top: 150px;
+         margin-left: 1px;
+         width: 800px;
+         height: 200px;
+         
+}
+#coverCaption {
+         text-align: center;
+         font-weight: bold;
+ 
+}
+
+  .roundabout-holder {
+         padding: 0;
+         height:4em;
+         list-style: none;
+         margin-left: 80px;
+}
+         
+   .roundabout-moveable-item {
+      height: 200px;
+      width: 150px;
+      cursor: pointer;
+      background-color: #F9F9F9;
+      border: 1px solid #999;
+   }
+   .roundabout-in-focus { cursor: auto; }
+
+img.cover {
+ display:inline;       
+}
+
+ul li {
+	 padding-left: 10px;
+	 list-style-position:inside;
+}
+
+#list ul li {
+display: inline;
+padding: 10px;
+
+}
+
+.howTo {
+  background-color: #E6E6E6;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+
+#logo {
+	position: absolute;
+	margin-left: 790px;
+	bottom: -14px;
+
+	
+}         
+
+#localMasthead {
+	height:54px;    
+}
+
+
+
+#localMasthead h3, #localMasthead h3 a {
+    position: absolute;
+}
+
+
+#searchWrapper {
+        left: 25px;
+	height:32px;
+        width: 500px;
+	position:relative;
+	border: 1px solid #CCCCCC;
+         margin-bottom: 20px;
+          margin-top: 20px;
+}
+
+#coverResults {
+       margin-left: 40px;  
+}
+
+#sideLoader {
+    position:absolute;     
+   left: 515px;      
+}
+
+#isbnInput{
+       
+        left: 0px;
+        width: 460px;
+	height:22px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom:5px;
+	position:absolute;
+	border: 0;
+	color: #666666;
+	font-family: Georgia,'Times New Roman',serif;
+	font-size: 13px;
+	font-style: italic;
+}
+
+#rightCol {
+         
+         padding: 10px;
+         background-color: #F9F9F9;
+         margin: 10px;
+         border: solid 2px #CCCCCC;
+}
+
+#bigSubmit {
+	left:470px;
+	width:22px;
+	height:22px;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-top: 5px;
+	padding-bottom:5px;
+	position:absolute;
+}
+
+
+#ISBNlabel, .boldheader {
+	font-size: 1.3em;
+	color: #999999;
+	font-weight: bolder;
+	
+}
+
+
+#recResults p {
+   font-size: 12pt;
+   padding: 5px;
+   
+}
+
+#requestCat, #requestForm submit, select {
+         padding: 2px;
+         border: 1px solid #999999;
+}
+
+#requestForm input, #requestForm textarea {
+         border: 1px solid grey;
+        
+
+}
+
+#requestForm  {
+           border: 1px solid grey;
+           padding: 10px;
+            margin-bottom: 100px;
+}
+
+#error {
+         
+         
+}
