@@ -23,7 +23,7 @@ function cleanISBN(isbnInput) {
 
 function showCopacCitation(isbnInput) {
 	$('#copacResults').show();
- $('#copacResults').load('../api/external/copacRequest2.php',{input: isbnInput, index: 'isbn', format: "html", mode: "citation"});
+ $('#copacResults').load('/recommend/api/copacRequest.php',{input: isbnInput, index: 'isbn', format: "html", mode: "citation"});
 }
 ////////////////////////////////
 
@@ -66,7 +66,7 @@ function getSalt(isbnInput,threshold,limit) {
       var i=1;
       var output ='';
       
-      var saltURL = "../api/external/salt.php?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";               
+      var saltURL = "recommend/api/salt.php?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";               
       var origURL = "http://vm-salt.mimas.ac.uk/getSuggestions.api?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";
       
      $('#debug1').html('<p>Original request URI:<br/> <a href="'+ origURL +'">' + origURL + '</a></p>');

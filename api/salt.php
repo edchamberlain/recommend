@@ -1,5 +1,5 @@
 <?php
-set_include_path ('/home/httpd/api/common/');
+set_include_path ('common');
 require_once 'xmlserialize.cls.php';
 require_once 'load.php';
 

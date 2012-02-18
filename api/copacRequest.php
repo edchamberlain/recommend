@@ -1,5 +1,5 @@
 <?php
-set_include_path ('/home/httpd/api/common/');
+set_include_path ('common');
 require_once 'badgerFish.php';
 require_once 'load.php';
 # Cross domain wrapper for COPAC's SRU/SRW service. Takes simple ISBN request, interrogates COPAC and returns Mods record fully converted to easily parsable JSON format.
