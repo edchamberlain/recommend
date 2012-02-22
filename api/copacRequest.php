@@ -2,30 +2,33 @@
 set_include_path ('common');
 require_once 'badgerFish.php';
 require_once 'load.php';
-# Cross domain wrapper for COPAC's SRU/SRW service. Takes simple ISBN request, interrogates COPAC and returns Mods record fully converted to easily parsable JSON format.
+
+/* Remove for debug */
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+xdebug_disable();
+
+
+# Cross domain wrapper for COPAC's SRU/SRW service. Takes request, interrogates COPAC and returns Mods record with JSON/ XML and HTML options. Citation mode simply returns bib data no holdings.
 
 # Breaks on this record 0415040272
 # Needs holdings attributes added
 
 # Ed Chamberlaim, Cambridge Univeristy Library 2009
 #72004153220
- $index= trim($_GET['index'])|trim($_POST['index']);
- $input =trim($_GET['input'])|trim($_POST['input']);
- $queryString=trim($_GET['queryString'])|trim($_POST['queryString']);
- 
- $mode =trim($_GET['mode'])|trim($_POST['mode']);
+ $index= trim($_GET['index'])|trim($_POST['index']) or $index='';
+ $input =trim($_GET['input'])|trim($_POST['input'])or $input ='';
+ $queryString=trim($_GET['queryString'])|trim($_POST['queryString']) or $queryString='';
+ $format = trim($_GET['format'])|trim($_POST['format']) or $format ='';
+ $maxrecords = $_GET['maxrecords']|$_POST['maxrecords'] or $maxrecords = 20;
+ $mode =trim($_GET['mode'])|trim($_POST['mode']) or $mode ='';
  
  if ($index =='isbn'| $index=='issn') {
  $input = trim(preg_replace('/(\W*)/', '', $_GET['input']))|trim(preg_replace('/(\W*)/', '', $_POST['input']));    
  }
  
- $format = trim($_GET['format'])|trim($_POST['format']);
- $maxrecords = $_GET['maxrecords']|$_POST['maxrecords'];
-
 if ($input && $index && $format || $queryString && $format){
      # $isbn= thingISBNCheck($_GET['isbn']);
      copacRetreive($input, $index, $format,$maxrecords, $queryString , $mode);
- 
 }         
 else {
    showForm();        

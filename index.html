@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="" />
     
-	<title>Recommendation demonstrator using  jQuery adn SALT API</title>
+	<title>Recommendation demonstrator using  jQuery and SALT API</title>
 	
 	
 <link rel="icon" type="image/png" href="http://uoc-dg.s3-external-3.amazonaws.com/img/favicon.png" />
@@ -21,20 +21,16 @@
 <script src="js/roundabout.js" type="text/javascript"></script>
 <script src="js/easing.js" type="text/javascript"></script>
 <script src="js/salt.js" type="text/javascript"></script> 
-	
 </head>
+
 <body class="home">
-  
  <div class="container">
+ <div class="sixteen columns">
 
-		<div class="sixteen columns">
-
-                    <h3>Quick and dirty library recommendations using SALT API</h3>
-	
+	            <h3>Quick and dirty library recommendations using SALT API</h3>
 	
 		    <!-- end #navPrimary -->
- <div id="content">
-	<div id="querySpace" class="two-thirds column" >
+<div id="querySpace" class="seven columns alpha" >
 	<br/>
 
 <p>Please note, this is a demo service only, its not yet running on Internet Explorer and there will be bugs! <br/> examples: 0582423333, 0198782705</p>
@@ -75,23 +71,30 @@
            <br/>
 	        <br/>
    </form>
-<p>Built using the <a href="http://salt11.wordpress.com/salt-recommender-api/">SALT API</a>. All cover images copyright <a href="http://www.bowker.com/syndetics/">Syndetics solutions</a>. Additional citation data taken via <a href="http://copac.ac.uk/interfaces/srw/">COPAC SRU gateway</a>.</p>
+<p>Built using the <a href="http://salt11.wordpress.com/salt-recommender-api/">SALT API</a>. All cover images from Open Library <a href="http://www.bowker.com/syndetics/">Syndetics solutions</a>. Additional citation data taken via <a href="http://copac.ac.uk/interfaces/srw/">COPAC SRU gateway</a>.</p>
+
 <div id="prompt"></div>
 <div id="debug1"></div>
-	
-	<!--<div id="debug2"></div>
-	<div id="debug3"></div>
-        <div id="debug4"></div>  -->
+<div id="debug2"></div>
+<div id="debug3"></div>
+<div id="debug4"></div>  
 	
  </div>	
 
-<div id="rightCol" class="grid_5 omega" style="display: block;">	
+<div id="rightCol" class="six columns omega" style="display: block;">
 <div id="coverResults"></div>
-<div id="copacResults"></div>
+<div id="copacResults"><div id="sideLoader">
+<img src="/recommend/img/ajax_loader.gif" /> <b>Loading...</b><br/>
+</div></div>
  </div>
  </div>
- <div id="results">
+
+ <div id="results" class="sixteen columns">
 <hr/>
+
+<div id="loader">
+<img src="/recommend/img/ajax_loader.gif" /> <b>Loading...</b><br/>
+</div>
 
 <p class="caption"><b>Recommendations as a carousel (click for options):</b></p>
 <div id="coverflow">
@@ -111,25 +114,8 @@
 <hr/>
 </div>
  <br/>
- 
-
-   
-</div><!-- end colums -->       
-                          
-
-</div> <!-- end content-->
-
-        <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-        try {
-        var pageTracker = _gat._getTracker("UA-10976633-1");
-        pageTracker._trackPageview();
-        } catch(err) {}</script>
-        <script src="/global/js/gaAddons.js" type="text/javascript"></script>
-
+ <hr/>
+ <p>Built with the <a href="http://www.getskeleton.com/">Skeleton boilerplate</a>.</p>
 </div> <!-- end container-->
 
 </body>

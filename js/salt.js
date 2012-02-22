@@ -1,6 +1,7 @@
 // Functions to query Salt API and format results for coverflow
-// Should probably use JSON
-// Cover images from Open Library ???
+// CSS skeleton fix and acknowledgement
+// Spinny wheels
+// Cover images from Open Library 
 
 //function to grab parameter from url
 	function gup(name) {
@@ -11,7 +12,6 @@
 		if (results == null) return "";
 		else return results[1];
 	}
-
 /////////////////////////////////////////
 
 function cleanISBN(isbnInput) {
@@ -22,13 +22,15 @@ function cleanISBN(isbnInput) {
 ////////////////////////////////
 
 function showCopacCitation(isbnInput) {
-	$('#copacResults').show();
- $('#copacResults').load('/recommend/api/copacRequest.php',{input: isbnInput, index: 'isbn', format: "html", mode: "citation"});
+$('#copacResults').show();
+$('#sideLoader').show();
+$('#copacResults').load('/recommend/api/copacRequest.php',{input: isbnInput, index: 'isbn', format: "html", mode: "citation"});
+$('#sideLoader').hide();
 }
 ////////////////////////////////
 
 function showCover(isbnInput) {
-  var coverURL = 'http://www.syndetics.com/index.aspx?isbn=' + isbnInput + '/mc.gif&upc=&oclc=&client=cambridgeh';
+  var coverURL = 'http://covers.openlibrary.org/b/isbn/' + isbnInput + '-M.jpg';
   // Check for 404 first ...
   $('#coverResults').show();
   $('#coverResults').html('<p>Showing recommendations based upon:</p><img src = "'+coverURL+'" />');
@@ -48,7 +50,7 @@ function  startCarousel() {
 	 	$('#myRoundabout li').focus(function() {
 			var useText = $(this).attr('alt');
 			var useisbn = $(this).attr('id');
-				$('#coverCaption').html('<h4>' + useText + '</h4><p>('+ useisbn +') - <a href="http://search.lib.cam.ac.uk/?q=isbn:'+ useisbn + '">check catalogue</a> - <a href="http://www.lib.cam.ac.uk/recommend/?isbn='+ useisbn + '">Browse on...</a>').fadeIn(200);
+				$('#coverCaption').html('<h4>' + useText + '</h4><p>('+ useisbn +') - <a href="http://search.lib.cam.ac.uk/?q=isbn:'+ useisbn + '">check catalogue</a> - <a href="/recommend/?isbn='+ useisbn + '">Browse on...</a>').fadeIn(200);
 			});
 	 //////////////////////////////////////////
 }
@@ -61,12 +63,12 @@ function getSalt(isbnInput,threshold,limit) {
      $('#imageWall').html('');
      $('ul#myRoundabout').html('');
      $('#list').append('<p><b>Recommendations as a list:</b></p>')
-     $('#sideLoader').show();
+     
       
       var i=1;
       var output ='';
       
-      var saltURL = "recommend/api/salt.php?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";               
+      var saltURL = "/recommend/api/salt.php?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";               
       var origURL = "http://vm-salt.mimas.ac.uk/getSuggestions.api?isbn=" + isbnInput + "&threshold=" + threshold + "&format=xml";
       
      $('#debug1').html('<p>Original request URI:<br/> <a href="'+ origURL +'">' + origURL + '</a></p>');
@@ -74,6 +76,7 @@ function getSalt(isbnInput,threshold,limit) {
      //    
         $.get(saltURL, {}, function (results_xml) {
           
+	  $('#loader').show();
 	   
    //   $('#debug3').html('<pre>' + results_xml + '</pre>');
               showCopacCitation(isbnInput);
@@ -86,17 +89,20 @@ function getSalt(isbnInput,threshold,limit) {
 	     var error = $(results_xml).find("error").text();
 	     
 	      if (error) {
+		$('#loader').hide();
 	          $('#prompt').html('<p><b>Error - ISBN probably not in SALT database yet.</b></p>');
 		  $('#prompt').append('<p><b>' + error + '</b></p>');
 		  $('#results').hide();
 	      }
 	      else if (comment)	{
+		$('#loader').hide();
 		  $('#prompt').html('<p><b>No recommendations returned, try altering threshold.</b></p>');
 		  ('#debug1').append('<p><b>' + comment + '</b></p>');
 		  $('#results').hide();
 	     
 	     // We are go ...
 	     }else {
+		$('#loader').hide();
                 $('item', results_xml).each(function(result_xml) {  
 		    var isbn = $(this).find("isbn").text();
                     var citation = $(this).find("citation").text();
@@ -105,11 +111,12 @@ function getSalt(isbnInput,threshold,limit) {
                     var ranking = $(this).find("ranking").text();
 		    
 		    // Draw results ...
-			$('ul#myRoundabout').append('<li id="'+ isbn +'" alt="'+ citation +'" style="background-repeat: no-repeat; background-image: url(\'http://www.syndetics.com/index.aspx?isbn=' + isbn + '/mc.gif&upc=&oclc=&client=cambridgeh\')"></li>');  
+		    // http://covers.openlibrary.org/b/isbn/9780385533225-S.jpg
+			$('ul#myRoundabout').append('<li id="'+ isbn +'" alt="'+ citation +'" style="background-repeat: no-repeat; background-image: url(\'http://covers.openlibrary.org/b/isbn/' + isbn + '-M.jpg\')"></li>');  
 			  
-			$('#list').append('<li>'+ ranking + '.) <a href="http://www.lib.cam.ac.uk/recommend/?isbn='+ isbn + '">'+ citation +'</a> ('+ isbn +') - <a href="http://search.lib.cam.ac.uk/?q=isbn:'+ isbn + '">check catalogue</a></li>');
+			$('#list').append('<li>'+ ranking + '.) <a href="/recommend/?isbn='+ isbn + '">'+ citation +'</a> ('+ isbn +') - <a href="http://search.lib.cam.ac.uk/?q=isbn:'+ isbn + '">check catalogue</a></li>');
 			
-			$('#imageWall').append('<a href="http://search.lib.cam.ac.uk/?q=isbn:'+ isbn + '"><img class="cover" src="http://www.syndetics.com/index.aspx?isbn=' + isbn + '/mc.gif&upc=&oclc=&client=cambridgeh" /></a>');
+			$('#imageWall').append('<a href="http://search.lib.cam.ac.uk/?q=isbn:'+ isbn + '"><img class="cover" src="http://covers.openlibrary.org/b/isbn/' + isbn + '-M.jpg" /></a>');
 		
 		   // Needlessly verboose limit thing?
 			if(i >= limit) {
@@ -127,13 +134,14 @@ function getSalt(isbnInput,threshold,limit) {
           
          } // end else
    });
- $('#sideLoader').hide();
+     
 }
 
 /////////////////////////////
 $(document).ready(function() {
 	//$('#loader').hide();
 	$('#sideLoader').hide();
+	 $('#loader').hide();
 	$('#results').hide();
 	$('#rightCol').hide();
 	
