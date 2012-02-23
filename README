@@ -1,0 +1,14 @@
+Barebones HTMl / JQuery recommender code
+
+Ed Chamberlain - Cambridge University Library 2012
+
+Warning -very unstable, not yet working with Internet Explorer, no spinny ajax wheels to denote loading!
+
+Contains:
+
+/api/ - PHP scripts to query COPAC SRU gateway and SALT recommendation service from MIMAS
+
+salt.js core logic to parse XML responses
+index.html
+/skeleton - boilerplate
+Various JQuery driven Ui demonstrators
