@@ -14,7 +14,7 @@ xdebug_disable();
   $threshold = trim($_GET['threshold'])|trim($_POST['threshold']) or $threshold=15;
 
   if ($isbn=='') {
-    // Return 404
+    // Return 404?
     print "<p>requires isbn parameter to work - full docs here (substitute base URI) http://salt11.wordpress.com/salt-recommender-api/</p>";
     
   } else {
